@@ -83,6 +83,7 @@ gulp.task('less', function () {
 gulp.task('copy', [
     'copy:misc',
     'copy:license',
+    'copy:images',
     'copy:other'
 
 
@@ -118,7 +119,11 @@ gulp.task('copy:license', function () {
     return gulp.src('LICENSE.txt')
         .pipe(gulp.dest(dirs.dist));
 });
-
+gulp.task('copy:images', function () {
+    return gulp.src(dirs.src + '/images/*')
+        .pipe(plugins.imagemin())
+        .pipe(gulp.dest(dirs.dist + '/images'));
+});
 
 gulp.task('copy:other', function () {
     return gulp.src([
